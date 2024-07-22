@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { createTask } from './DTO/createTask.dto';
 
 @Injectable()
 export class TaskModuleService {
@@ -10,9 +11,15 @@ export class TaskModuleService {
     }
 
 
-    createTask(task:any){
+    getOneTask(id:number){
+        console.log(id)
+        return this.task.find(task=>task.id==id)
+
+    }
+
+    createTask(task:createTask){
         console.log(task);
-        return this.task.push(task)
+        return this.task.push({...task, id: this.task.length +1})
     }
 
     updateTask(){
